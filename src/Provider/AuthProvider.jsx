@@ -10,18 +10,22 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const signInUser = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     }
 
 
 
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
@@ -33,13 +37,14 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log('observing', currentUser);
+            setLoading(false);
         });
         return () => {
             unsubscribe();
         }
     }, [])
 
-    const authinfo = { user, createUser, signInUser, logOut }
+    const authinfo = { user, loading,createUser, signInUser, logOut }
 
     return (
         <AuthContext.Provider value={authinfo}>
