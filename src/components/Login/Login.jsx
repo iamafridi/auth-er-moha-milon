@@ -18,9 +18,9 @@ const Login = () => {
             .then(result => {
                 console.log(result.user);
             })
-            .catch(error =>{
-                 console.error(error)
-                })
+            .catch(error => {
+                console.error(error)
+            })
 
 
     }
@@ -35,12 +35,6 @@ const Login = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
-                            <input type="text" name="name" placeholder="Your Name" className="input input-bordered" required />
-                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
