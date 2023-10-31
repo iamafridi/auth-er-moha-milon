@@ -1,23 +1,30 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import  { AuthContext } from "../../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
 
-    const { user ,logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-const handleLogOut = () =>{
-    logOut()
-    .then(()=> console.log('User Logged out successfully'))
-    .catch(error =>console.error (error))
-}
+    const handleLogOut = () => {
+        logOut()
+            .then(() => console.log('User Logged out successfully'))
+            .catch(error => console.error(error))
+    }
 
 
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
         <li><NavLink to="/register">Register</NavLink></li>
-        <li><NavLink to="/feed">Feed</NavLink></li>
+
+
+        {
+            user && <>
+                <li><NavLink to="/feed">Feed</NavLink></li>
+                <li><NavLink to="/profile">Profile</NavLink></li>
+            </>
+        }
 
     </>
 
@@ -44,13 +51,13 @@ const handleLogOut = () =>{
             <div className="navbar-end">
                 {
                     user ? <>
-                    <span className="mr-4 border border-blue-800 rounded-full p-1.5">{user.email}</span> 
-                    <a onClick={handleLogOut} className="btn btn-sm">Sign Out</a>
-                     </>
-                     :
-                     <Link to="/login"> <button className="btn btn-sm">LogIn</button>
-                     </Link>  }
-                
+                        <span className="mr-4 border border-blue-800 rounded-full p-1.5">{user.email}</span>
+                        <a onClick={handleLogOut} className="btn btn-sm">Sign Out</a>
+                    </>
+                        :
+                        <Link to="/login"> <button className="btn btn-sm">LogIn</button>
+                        </Link>}
+
             </div>
         </div>
     );

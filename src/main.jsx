@@ -12,6 +12,7 @@ import Login from './components/login/login';
 import AuthProvider from './Provider/AuthProvider';
 import PrivateRoute from './components/Route/PrivateRoute';
 import Feed from './components/Feed/Feed';
+import Profile from './components/Profile/Profile';
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path:"/feed",
         element:<PrivateRoute><Feed></Feed></PrivateRoute>
+      },
+      {
+        path:"/profile",
+        element:<PrivateRoute><Profile></Profile></PrivateRoute>
       }
     ]
   },

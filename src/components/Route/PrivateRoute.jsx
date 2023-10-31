@@ -1,16 +1,18 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Navigate } from "react-router-dom";
+import PropTypes from 'prop-types';
+
 
 const PrivateRoute = ({ children }) => {
 
-    const { user ,loading } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
-    if(loading){
+    if (loading) {
         return <span className="loading loading-dots loading-lg justify-center items-center"></span>;
     }
 
-    if (user ) {
+    if (user) {
         return children;
     }
 
@@ -18,3 +20,7 @@ const PrivateRoute = ({ children }) => {
 };
 
 export default PrivateRoute;
+
+PrivateRoute.propTypes = {
+    children: PropTypes.node
+}
